@@ -6,10 +6,13 @@ window.config = {
   showStudyList: true,
   maxNumberOfWebWorkers: 3,
   showLoadingIndicator: true,
+  showWarningMessageForCrossOrigin: true,
+  showCPUFallbackMessage: true,
+  strictZSpacingForVolumeViewport: true,
   // filterQueryParam: false,
   dataSources: [
     {
-      friendlyName: 'OrthancPi Server',
+      friendlyName: 'OrthancPi (local) Server',
       namespace: '@ohif/extension-default.dataSourcesModule.dicomweb',
       sourceName: 'dicomweb',
       configuration: {
@@ -22,6 +25,7 @@ window.config = {
         imageRendering: 'wadors',
         thumbnailRendering: 'wadors',
         enableStudyLazyLoad: true,
+        useBulkDataURI: false,
         supportsFuzzyMatching: true,
         supportsWildcard: true,
       },

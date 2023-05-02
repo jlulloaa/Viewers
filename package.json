@@ -19,6 +19,7 @@
   "scripts": {
     "cm": "npx git-cz",
     "build": "lerna run build:viewer --stream",
+    "build:juviewer": "lerna run build:juviewer --stream",
     "build:dev": "lerna run build:dev --stream",
     "build:ci": "lerna run build:viewer:ci --stream",
     "build:qa": "lerna run build:viewer:qa --stream",
@@ -29,6 +30,7 @@
     "dev": "lerna run dev:viewer --stream",
     "dev:project": ".scripts/dev.sh",
     "dev:orthanc": "lerna run dev:orthanc --stream",
+    "dev:locorthanc": "lerna run dev:locorthanc --stream",
     "dev:orthandex": "lerna run dev:orthandex --stream",
     "dev:dcm4chee": "lerna run dev:dcm4chee --stream",
     "dev:static": "lerna run dev:static --stream",
