@@ -1,5 +1,9 @@
 window.config = {
   routerBasename: '/',
+  customizationService: {
+    dicomUploadComponent:
+      '@ohif/extension-cornerstone.customizationModule.cornerstoneDicomUploadComponent',
+  },
   showStudyList: true,
   extensions: [],
   modes: [],
@@ -23,10 +27,10 @@ window.config = {
         imageRendering: 'wadors',
         enableStudyLazyLoad: true,
         thumbnailRendering: 'wadors',
-        useBulkDataURI: false,
         requestOptions: {
           auth: 'admin:admin',
         },
+        dicomUploadEnabled: true,
       },
     },
     {
