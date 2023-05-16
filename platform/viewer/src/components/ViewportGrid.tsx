@@ -65,6 +65,7 @@ function ViewerViewportGrid(props) {
       displaySetsInfo.forEach(
         ({ displaySetInstanceUID, displaySetOptions }) => {
           if (displaySetInstanceUID) {
+            console.log('(JU DEBUG) ' + displaySetInstanceUID)
             displaySetUIDsToHang.push(displaySetInstanceUID);
           }
 

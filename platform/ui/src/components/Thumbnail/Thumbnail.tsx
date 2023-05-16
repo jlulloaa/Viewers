@@ -71,11 +71,11 @@ const Thumbnail = ({
         <div className="flex flex-row items-center flex-1 pt-2 text-base text-blue-300">
           <div className="mr-4">
             <span className="font-bold text-primary-main">{'S: '}</span>
-            {seriesNumber}
+            {`(JU DEBUG) numSer ${seriesNumber}`}
           </div>
           <div className="flex flex-row items-center flex-1">
             <Icon name={countIcon || 'group-layers'} className="w-3 mr-2" />
-            {` ${numInstances}`}
+            {`(JU DEBUG) numInst ${numInstances}`}
           </div>
         </div>
         <div className="text-base text-white break-all">{description}</div>

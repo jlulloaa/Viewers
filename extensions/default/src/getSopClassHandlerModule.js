@@ -19,6 +19,13 @@ const makeDisplaySet = instances => {
     averageSpacingBetweenFrames,
   } = isDisplaySetReconstructable(instances);
 
+  console.log('(JU DEBUG) output: ');
+  console.log(isDisplaySetReconstructable(instances));
+  console.log('(JU DEBUG) 1st output from isDisplaySet: ' + isReconstructable);
+
+  console.log(
+    '(JU DEBUG) 2nd output from isDisplaySet: ' + averageSpacingBetweenFrames
+  );
   // set appropriate attributes to image set...
   imageSet.setAttributes({
     displaySetInstanceUID: imageSet.uid, // create a local alias for the imageSet UID
@@ -38,7 +45,14 @@ const makeDisplaySet = instances => {
     isReconstructable,
     averageSpacingBetweenFrames: averageSpacingBetweenFrames || null,
   });
-
+  console.log(
+    '(JU DEBUG) testing the output: isReconstructable: ' +
+      imageSet.isReconstructable
+  );
+  console.log(
+    '(JU DEBUG) testing the output: Any missing frame?: ' +
+      imageSet.averageSpacingBetweenFrames
+  );
   // Sort the images in this series if needed
   const shallSort = true; //!OHIF.utils.ObjectPath.get(Meteor, 'settings.public.ui.sortSeriesByIncomingOrder');
   if (shallSort) {

@@ -38,6 +38,7 @@ export default function isDisplaySetReconstructable(instances) {
   }
 
   const sortedInstances = sortInstancesByPosition(instances);
+  console.log('(JU DEBUG) Is Multi-frame?:' + isMultiframe);
 
   return isMultiframe
     ? processMultiframe(sortedInstances[0])
@@ -197,18 +198,29 @@ function processSingleframe(instances) {
 
       if (spacingIssue) {
         const issue = spacingIssue.issue;
+        console.log('(JU DEBUG) Yes, there is a spacing issue...');
+        console.log('(JU DEBUG) the issue is ' + issue);
+        console.log(
+          '(JU DEBUG) the issue to compare against is ' +
+            reconstructionIssues.MISSING_FRAMES
+        );
 
         if (issue === reconstructionIssues.MISSING_FRAMES) {
           missingFrames += spacingIssue.missingFrames;
+          console.log('(JU DEBUG) there are some frames missing');
         } else if (issue === reconstructionIssues.IRREGULAR_SPACING) {
-          return { value: false };
+          return { value: false, missingFrames };
         }
       }
 
       previousImagePositionPatient = imagePositionPatient;
     }
   }
-
+  console.log(
+    '(JU DEBUG) If there are missing frames, it counted ' +
+      missingFrames +
+      ' missing frames'
+  );
   return { value: true, missingFrames };
 }
 
