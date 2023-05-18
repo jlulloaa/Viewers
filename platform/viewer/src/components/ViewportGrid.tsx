@@ -166,8 +166,6 @@ function ViewerViewportGrid(props) {
         const displaySet = displaySetService.getDisplaySetByUID(
           referencedDisplaySetInstanceUID
         );
-        console.log('(JU DEBUG) DisplaySer View Port: ')
-        console.log(displaySet)
         // jump straight to the initial image index if we can
         if (displaySet.images && measurement.SOPInstanceUID) {
           for (let index = 0; index < displaySet.images.length; index++) {

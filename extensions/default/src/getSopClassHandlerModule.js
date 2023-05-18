@@ -16,17 +16,11 @@ const makeDisplaySet = instances => {
 
   const {
     value: isReconstructable,
-    // (JU DEBUG)
+    // (IDC Issue 3360)
     issue_description: warning,
     missingFrames: averageSpacingBetweenFrames,
   } = isDisplaySetReconstructable(instances);
 
-  console.log('(JU DEBUG) output: ');
-  console.log(isDisplaySetReconstructable(instances));
-
-  console.log(
-    '(JU DEBUG) 2nd output from isDisplaySet: ' + averageSpacingBetweenFrames
-  );
   // set appropriate attributes to image set...
   imageSet.setAttributes({
     displaySetInstanceUID: imageSet.uid, // create a local alias for the imageSet UID
@@ -45,7 +39,7 @@ const makeDisplaySet = instances => {
     SOPClassHandlerId: `${id}.sopClassHandlerModule.${sopClassHandlerName}`,
     isReconstructable,
     averageSpacingBetweenFrames: averageSpacingBetweenFrames || null,
-    // (JU DEBUG)
+    // (IDC Issue 3360)
     itHasWarnings: warning,
   });
   // Sort the images in this series if needed
@@ -155,9 +149,6 @@ function getDisplaySetsFromSeries(instances) {
     });
     displaySets.push(displaySet);
   }
-
-  console.log('(JU DEBUG) inside displaySet:');
-  console.log(displaySets);
 
   return displaySets;
 }

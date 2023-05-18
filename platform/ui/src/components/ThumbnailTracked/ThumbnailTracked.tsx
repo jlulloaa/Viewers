@@ -12,7 +12,7 @@ const ThumbnailTracked = ({
   imageAltText,
   description,
   seriesNumber,
-  // (JU DEBUG)
+  // (IDC Issue 3360)
   hasWarnings,
   numInstances,
   countIcon,
@@ -119,7 +119,7 @@ const ThumbnailTracked = ({
         dragData={dragData}
         description={description}
         seriesNumber={seriesNumber}
-        // (JU DEBUG)
+        // (IDC Issue 3360)
         hasWarnings={hasWarnings}
         numInstances={numInstances}
         countIcon={countIcon}
@@ -149,7 +149,7 @@ ThumbnailTracked.propTypes = {
   imageAltText: PropTypes.string,
   description: PropTypes.string.isRequired,
   seriesNumber: StringNumber.isRequired,
-  // (JU DEBUG)
+  // (IDC Issue 3360)
   hasWarnings: PropTypes.string,
   numInstances: PropTypes.number.isRequired,
   onClick: PropTypes.func.isRequired,

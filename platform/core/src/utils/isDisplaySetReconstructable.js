@@ -165,7 +165,7 @@ function processSingleframe(instances) {
 
   // Check if frame spacing is approximately equal within a spacingTolerance.
   // If spacing is on a uniform grid but we are missing frames,
-  // (JU DEBUG) or if the spacing is not on a uniform grid,
+  // (JU added) or if the spacing is not on a uniform grid,
   // Allow reconstruction, but pass back the (JU - equivalent) number of missing frames.
   if (instances.length > 2) {
     const lastIpp = toNumber(
@@ -199,8 +199,6 @@ function processSingleframe(instances) {
 
       if (spacingIssue) {
         const issue = spacingIssue.issue;
-        console.log('(JU DEBUG) There is a spacing issue...');
-        console.log('(JU DEBUG) The spacing issue is: ' + issue);
 
         if (issue === reconstructionIssues.MISSING_FRAMES) {
           missingFrames += spacingIssue.missingFrames;

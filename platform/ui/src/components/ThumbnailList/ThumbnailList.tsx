@@ -19,7 +19,7 @@ const ThumbnailList = ({
           description,
           dragData,
           seriesNumber,
-          // (JU DEBUG)
+          // (IDC Issue 3360)
           hasWarnings,
           numInstances,
           modality,
@@ -36,7 +36,6 @@ const ThumbnailList = ({
           const isActive = activeDisplaySetInstanceUIDs.includes(
             displaySetInstanceUID
           );
-          // console.log('(JU DEBUG) hasWarnings?: ' + hasWarnings);
           switch (componentType) {
             case 'thumbnail':
               return (
@@ -46,7 +45,7 @@ const ThumbnailList = ({
                   dragData={dragData}
                   description={description}
                   seriesNumber={seriesNumber}
-                  // (JU DEBUG)
+                  // (IDC Issue 3360)
                   hasWarnings={hasWarnings}
                   numInstances={numInstances}
                   countIcon={countIcon}
@@ -68,7 +67,7 @@ const ThumbnailList = ({
                   dragData={dragData}
                   description={description}
                   seriesNumber={seriesNumber}
-                  // (JU DEBUG)
+                  // (IDC Issue 3360)
                   hasWarnings={hasWarnings}
                   numInstances={numInstances}
                   countIcon={countIcon}
@@ -121,7 +120,7 @@ ThumbnailList.propTypes = {
       imageAltText: PropTypes.string,
       seriesDate: PropTypes.string,
       seriesNumber: Types.StringNumber,
-      // (JU DEBUG)
+      // (IDC Issue 3360)
       hasWarnings: PropTypes.string,
       numInstances: PropTypes.number,
       description: PropTypes.string,
