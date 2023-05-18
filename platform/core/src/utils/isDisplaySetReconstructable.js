@@ -38,7 +38,6 @@ export default function isDisplaySetReconstructable(instances) {
   }
 
   const sortedInstances = sortInstancesByPosition(instances);
-  console.log('(JU DEBUG) Is Multi-frame?:' + isMultiframe);
 
   return isMultiframe
     ? processMultiframe(sortedInstances[0])
@@ -162,10 +161,12 @@ function processSingleframe(instances) {
   }
 
   let missingFrames = 0;
+  let issue_description = null;
 
   // Check if frame spacing is approximately equal within a spacingTolerance.
   // If spacing is on a uniform grid but we are missing frames,
-  // Allow reconstruction, but pass back the number of missing frames.
+  // (JU DEBUG) or if the spacing is not on a uniform grid,
+  // Allow reconstruction, but pass back the (JU - equivalent) number of missing frames.
   if (instances.length > 2) {
     const lastIpp = toNumber(
       instances[instances.length - 1].ImagePositionPatient
@@ -198,30 +199,22 @@ function processSingleframe(instances) {
 
       if (spacingIssue) {
         const issue = spacingIssue.issue;
-        console.log('(JU DEBUG) Yes, there is a spacing issue...');
-        console.log('(JU DEBUG) the issue is ' + issue);
-        console.log(
-          '(JU DEBUG) the issue to compare against is ' +
-            reconstructionIssues.MISSING_FRAMES
-        );
+        console.log('(JU DEBUG) There is a spacing issue...');
+        console.log('(JU DEBUG) The spacing issue is: ' + issue);
 
         if (issue === reconstructionIssues.MISSING_FRAMES) {
           missingFrames += spacingIssue.missingFrames;
-          console.log('(JU DEBUG) there are some frames missing');
+          issue_description = `Spacing issue equivalent to missing ${missingFrames} frames`;
         } else if (issue === reconstructionIssues.IRREGULAR_SPACING) {
-          return { value: false, missingFrames };
+          return { value: false };
         }
       }
 
       previousImagePositionPatient = imagePositionPatient;
     }
   }
-  console.log(
-    '(JU DEBUG) If there are missing frames, it counted ' +
-      missingFrames +
-      ' missing frames'
-  );
-  return { value: true, missingFrames };
+
+  return { value: true, issue_description, missingFrames };
 }
 
 function _isSameOrientation(iop1, iop2) {

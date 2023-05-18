@@ -16,12 +16,13 @@ const makeDisplaySet = instances => {
 
   const {
     value: isReconstructable,
-    averageSpacingBetweenFrames,
+    // (JU DEBUG)
+    issue_description: warning,
+    missingFrames: averageSpacingBetweenFrames,
   } = isDisplaySetReconstructable(instances);
 
   console.log('(JU DEBUG) output: ');
   console.log(isDisplaySetReconstructable(instances));
-  console.log('(JU DEBUG) 1st output from isDisplaySet: ' + isReconstructable);
 
   console.log(
     '(JU DEBUG) 2nd output from isDisplaySet: ' + averageSpacingBetweenFrames
@@ -44,15 +45,9 @@ const makeDisplaySet = instances => {
     SOPClassHandlerId: `${id}.sopClassHandlerModule.${sopClassHandlerName}`,
     isReconstructable,
     averageSpacingBetweenFrames: averageSpacingBetweenFrames || null,
+    // (JU DEBUG)
+    itHasWarnings: warning,
   });
-  console.log(
-    '(JU DEBUG) testing the output: isReconstructable: ' +
-      imageSet.isReconstructable
-  );
-  console.log(
-    '(JU DEBUG) testing the output: Any missing frame?: ' +
-      imageSet.averageSpacingBetweenFrames
-  );
   // Sort the images in this series if needed
   const shallSort = true; //!OHIF.utils.ObjectPath.get(Meteor, 'settings.public.ui.sortSeriesByIncomingOrder');
   if (shallSort) {
@@ -160,6 +155,9 @@ function getDisplaySetsFromSeries(instances) {
     });
     displaySets.push(displaySet);
   }
+
+  console.log('(JU DEBUG) inside displaySet:');
+  console.log(displaySets);
 
   return displaySets;
 }

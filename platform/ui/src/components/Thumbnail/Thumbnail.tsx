@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { useDrag } from 'react-dnd';
-import { Icon } from '../';
+import { Icon, Tooltip } from '../';
 import { StringNumber } from '../../types';
 
 /**
@@ -15,6 +15,8 @@ const Thumbnail = ({
   imageAltText,
   description,
   seriesNumber,
+  // (JU DEBUG)
+  hasWarnings,
   numInstances,
   countIcon,
   dragData,
@@ -71,12 +73,31 @@ const Thumbnail = ({
         <div className="flex flex-row items-center flex-1 pt-2 text-base text-blue-300">
           <div className="mr-4">
             <span className="font-bold text-primary-main">{'S: '}</span>
-            {`(JU DEBUG) numSer ${seriesNumber}`}
+            {/* {`(JU DEBUG) numSer ${seriesNumber}`} */}
+            {seriesNumber}
           </div>
           <div className="flex flex-row items-center flex-1">
             <Icon name={countIcon || 'group-layers'} className="w-3 mr-2" />
-            {`(JU DEBUG) numInst ${numInstances}`}
+            {` ${numInstances}`}
           </div>
+          {/* (JU DEBUG) */}
+          {hasWarnings ? (
+            <div>
+              <Tooltip
+                position="left"
+                content={
+                  <div className="text-left max-w-40">{hasWarnings}</div>
+                }
+              >
+                <Icon
+                  name="notifications-warning"
+                  className="text-white py-2"
+                />
+              </Tooltip>
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
         <div className="text-base text-white break-all">{description}</div>
       </div>
@@ -102,6 +123,8 @@ Thumbnail.propTypes = {
   imageAltText: PropTypes.string,
   description: PropTypes.string.isRequired,
   seriesNumber: StringNumber.isRequired,
+  // (JU DEBUG)
+  hasWarnings: PropTypes.string,
   numInstances: PropTypes.number.isRequired,
   isActive: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,
