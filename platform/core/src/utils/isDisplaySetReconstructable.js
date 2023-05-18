@@ -161,10 +161,11 @@ function processSingleframe(instances) {
   }
 
   let missingFrames = 0;
-
+  let issueDescription = null; // IDC #3360
   // Check if frame spacing is approximately equal within a spacingTolerance.
   // If spacing is on a uniform grid but we are missing frames,
-  // Allow reconstruction, but pass back the number of missing frames.
+  // (JU - IDC #3360) or if the spacing is not on a uniform grid,
+  // Allow reconstruction, but pass back the (equivalent) number of missing frames.
   if (instances.length > 2) {
     const lastIpp = toNumber(
       instances[instances.length - 1].ImagePositionPatient
@@ -200,6 +201,7 @@ function processSingleframe(instances) {
 
         if (issue === reconstructionIssues.MISSING_FRAMES) {
           missingFrames += spacingIssue.missingFrames;
+          issueDescription = `Spacing issue equivalent to missing ${missingFrames} frames`; // IDC #3360
         } else if (issue === reconstructionIssues.IRREGULAR_SPACING) {
           return { value: false };
         }
@@ -209,7 +211,8 @@ function processSingleframe(instances) {
     }
   }
 
-  return { value: true, missingFrames };
+  // IDC #3360 - Added issueDescription to the list of output
+  return { value: true, issueDescription, missingFrames };
 }
 
 function _isSameOrientation(iop1, iop2) {

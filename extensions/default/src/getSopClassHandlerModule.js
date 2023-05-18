@@ -16,7 +16,8 @@ const makeDisplaySet = instances => {
 
   const {
     value: isReconstructable,
-    averageSpacingBetweenFrames,
+    issueDescription: warning, // IDC #3360
+    missingFrames: averageSpacingBetweenFrames, // IDC #3360
   } = isDisplaySetReconstructable(instances);
 
   // set appropriate attributes to image set...
@@ -37,6 +38,7 @@ const makeDisplaySet = instances => {
     SOPClassHandlerId: `${id}.sopClassHandlerModule.${sopClassHandlerName}`,
     isReconstructable,
     averageSpacingBetweenFrames: averageSpacingBetweenFrames || null,
+    itHasWarnings: warning, //IDC #3360
   });
 
   // Sort the images in this series if needed

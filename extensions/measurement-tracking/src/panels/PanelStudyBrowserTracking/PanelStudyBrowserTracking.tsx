@@ -471,6 +471,7 @@ function _mapDisplaySets(
         displaySetInstanceUID,
         description: ds.SeriesDescription,
         seriesNumber: ds.SeriesNumber,
+        hasWarnings: ds.itHasWarnings, // IDC #3360
         modality: ds.Modality,
         seriesDate: formatDate(ds.SeriesDate),
         numInstances: ds.numImageFrames,

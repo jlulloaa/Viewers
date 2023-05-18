@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { useDrag } from 'react-dnd';
-import { Icon } from '../';
+import { Icon, Tooltip } from '../'; // IDC #3360 - Added Tooltip
 import { StringNumber } from '../../types';
 
 /**
@@ -15,6 +15,7 @@ const Thumbnail = ({
   imageAltText,
   description,
   seriesNumber,
+  hasWarnings, // IDC #3360
   numInstances,
   countIcon,
   dragData,
@@ -77,6 +78,24 @@ const Thumbnail = ({
             <Icon name={countIcon || 'group-layers'} className="w-3 mr-2" />
             {` ${numInstances}`}
           </div>
+          {/* (IDC Issue 3360) */}
+          {hasWarnings ? (
+            <div>
+              <Tooltip
+                position="left"
+                content={
+                  <div className="text-left max-w-40">{hasWarnings}</div>
+                }
+              >
+                <Icon
+                  name="notifications-warning"
+                  className="text-white py-2"
+                />
+              </Tooltip>
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
         <div className="text-base text-white break-all">{description}</div>
       </div>
@@ -102,6 +121,7 @@ Thumbnail.propTypes = {
   imageAltText: PropTypes.string,
   description: PropTypes.string.isRequired,
   seriesNumber: StringNumber.isRequired,
+  hasWarnings: PropTypes.string, // IDC #3360
   numInstances: PropTypes.number.isRequired,
   isActive: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,

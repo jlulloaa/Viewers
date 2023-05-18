@@ -19,6 +19,7 @@ const ThumbnailList = ({
           description,
           dragData,
           seriesNumber,
+          hasWarnings, // IDC #3360
           numInstances,
           modality,
           componentType,
@@ -43,6 +44,7 @@ const ThumbnailList = ({
                   dragData={dragData}
                   description={description}
                   seriesNumber={seriesNumber}
+                  hasWarnings={hasWarnings} // IDC #3360
                   numInstances={numInstances}
                   countIcon={countIcon}
                   imageSrc={imageSrc}
@@ -63,6 +65,7 @@ const ThumbnailList = ({
                   dragData={dragData}
                   description={description}
                   seriesNumber={seriesNumber}
+                  hasWarnings={hasWarnings} // IDC #3360
                   numInstances={numInstances}
                   countIcon={countIcon}
                   imageSrc={imageSrc}
@@ -114,6 +117,7 @@ ThumbnailList.propTypes = {
       imageAltText: PropTypes.string,
       seriesDate: PropTypes.string,
       seriesNumber: Types.StringNumber,
+      hasWarnings: PropTypes.string, // IDC #3360
       numInstances: PropTypes.number,
       description: PropTypes.string,
       componentType: Types.ThumbnailType.isRequired,

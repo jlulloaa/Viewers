@@ -311,6 +311,7 @@ function _mapDisplaySets(displaySets, thumbnailImageSrcMap) {
         displaySetInstanceUID: ds.displaySetInstanceUID,
         description: ds.SeriesDescription || '',
         seriesNumber: ds.SeriesNumber,
+        hasWarnings: ds.itHasWarnings, // IDC #3360
         modality: ds.Modality,
         seriesDate: ds.SeriesDate,
         seriesTime: ds.SeriesTime,

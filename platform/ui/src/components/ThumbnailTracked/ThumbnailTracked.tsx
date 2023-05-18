@@ -12,6 +12,7 @@ const ThumbnailTracked = ({
   imageAltText,
   description,
   seriesNumber,
+  hasWarnings, // IDC #3360
   numInstances,
   countIcon,
   dragData,
@@ -36,7 +37,7 @@ const ThumbnailTracked = ({
             ))}
           </div>
           <Tooltip
-            position="right"
+            position="bottom"
             content={
               <div className="text-left max-w-40">
                 Series is displayed <br /> in viewport{' '}
@@ -117,6 +118,7 @@ const ThumbnailTracked = ({
         dragData={dragData}
         description={description}
         seriesNumber={seriesNumber}
+        hasWarnings={hasWarnings} // IDC #3360
         numInstances={numInstances}
         countIcon={countIcon}
         isActive={isActive}
@@ -145,6 +147,7 @@ ThumbnailTracked.propTypes = {
   imageAltText: PropTypes.string,
   description: PropTypes.string.isRequired,
   seriesNumber: StringNumber.isRequired,
+  hasWarnings: PropTypes.string, // IDC #3360
   numInstances: PropTypes.number.isRequired,
   onClick: PropTypes.func.isRequired,
   onDoubleClick: PropTypes.func.isRequired,
