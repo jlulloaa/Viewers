@@ -1,4 +1,3 @@
-
 export default class ValidationManager {
   private _displaySetValidations: any;
   // private _studyValidations: any;
@@ -6,13 +5,16 @@ export default class ValidationManager {
   // private _imageValidations: any;
   private _validationModules: any;
 
-  constructor({
-    commandsManager,
-    servicesManager,
-    hotkeysManager,
-    appConfig = {},
-  }: any) {
-
+  // constructor({
+  //   commandsManager,
+  //   servicesManager,
+  //   hotkeysManager,
+  //   appConfig = {},
+  // }: any) {
+  constructor(commandsManager, servicesManager) {
+    // (JU) Initialise these private variables, not sure is needed, but viewer loaded ok after adding them ...
+    this._validationModules = [];
+    this._displaySetValidations = [];
   }
 
   public registerValidationModule(validationModule: any) {
@@ -40,7 +42,9 @@ export default class ValidationManager {
   }
 
   public validateDisplaySet(displaySet: any) {
-    const validationResults = this._displaySetValidations.map(validationDefinition => validationDefinition.validate(displaySet));
+    const validationResults = this._displaySetValidations.map(
+      validationDefinition => validationDefinition.validate(displaySet)
+    );
 
     // validationResults.forEach(validationResult => {
     //   if (validationResult.messageType === 'toast') {

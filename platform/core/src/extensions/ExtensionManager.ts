@@ -3,6 +3,8 @@ import log from '../log';
 import { AppConfig } from '../types/AppConfig';
 import { ServicesManager } from '../services';
 import { HotkeysManager, CommandsManager } from '../classes';
+// (JU) Adding Validation Manager:
+import { ValidationManager } from '../validations';
 
 /**
  * This is the arguments given to create the extension.
@@ -11,6 +13,8 @@ export interface ExtensionConstructor {
   servicesManager: ServicesManager;
   commandsManager: CommandsManager;
   hotkeysManager: HotkeysManager;
+  // (JU) validation manager
+  validationManager: ValidationManager;
   appConfig: AppConfig;
 }
 
@@ -42,6 +46,8 @@ export interface Extension {
   getViewportModule?: (p: ExtensionParams) => unknown;
   getUtilityModule?: (p: ExtensionParams) => unknown;
   getCustomizationModule?: (p: ExtensionParams) => unknown;
+  // (JU) getValidationModule, does it go here?
+  // getValidationModule?: (p: ExtensionParams) => unknown;
   onModeEnter?: () => void;
   onModeExit?: () => void;
 }
@@ -61,7 +67,7 @@ export default class ExtensionManager {
   private _commandsManager: CommandsManager;
   private _servicesManager: ServicesManager;
   private _hotkeysManager: HotkeysManager;
-  private _validationManager: any;
+  private _validationManager: ValidationManager; // any;
 
   constructor({
     commandsManager,
@@ -107,6 +113,8 @@ export default class ExtensionManager {
       _servicesManager,
       _commandsManager,
       _hotkeysManager,
+      // (JU)
+      _validationManager,
       _extensionLifeCycleHooks,
     } = this;
 
@@ -239,6 +247,8 @@ export default class ExtensionManager {
         servicesManager: this._servicesManager,
         commandsManager: this._commandsManager,
         hotkeysManager: this._hotkeysManager,
+        // JU
+        validationManager: this._validationManager,
         extensionManager: this,
         appConfig: this._appConfig,
         configuration,
@@ -302,7 +312,7 @@ export default class ExtensionManager {
             break;
           case MODULE_TYPES.VALIDATION:
             this._validationManager.registerValidationModule(extensionModule);
-              break;
+            break;
           default:
             throw new Error(`Module type invalid: ${moduleType}`);
         }

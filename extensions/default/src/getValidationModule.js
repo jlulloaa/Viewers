@@ -82,3 +82,6 @@ const validationModule = () => {
     ],
   };
 };
+
+// (JU)
+export default validationModule;
