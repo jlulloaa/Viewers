@@ -36,8 +36,12 @@ function PanelStudyBrowser({
   ]);
   const [studyDisplayList, setStudyDisplayList] = useState([]);
   const [displaySets, setDisplaySets] = useState([]);
+  // (JU) Update validations
+  const [validationResults, setValidationResults] = useState([]);
   const [thumbnailImageSrcMap, setThumbnailImageSrcMap] = useState({});
   const isMounted = useRef(true);
+
+  console.log('(JU) Is the exec getting here?');
 
   const onDoubleClickThumbnailHandler = displaySetInstanceUID => {
     let updatedViewports = [];
@@ -163,10 +167,13 @@ function PanelStudyBrowser({
       displaySetService.EVENTS.DISPLAY_SETS_ADDED,
       data => {
         const { displaySetsAdded } = data;
-
         displaySetsAdded.forEach(async dSet => {
-          const validationResults = validationManager.validateDisplaySet(dSet);
-          setValidationResults(validationResults);
+          // (JU)
+          console.log('(JU) showing displaySet: ');
+          console.log(dSet);
+          // const validationResults = validationManager.validateDisplaySet(dSet);
+          // setValidationResults(validationResults);
+          setValidationResults(validationManager.validateDisplaySet(dSet));
 
           const newImageSrcEntry = {};
           const displaySet = displaySetService.getDisplaySetByUID(
@@ -269,6 +276,8 @@ PanelStudyBrowser.propTypes = {
     getImageIdsForDisplaySet: PropTypes.func.isRequired,
   }).isRequired,
   getImageSrc: PropTypes.func.isRequired,
+  // (JU)
+  validationManager: PropTypes.func.isRequired,
   getStudiesForPatientByMRN: PropTypes.func.isRequired,
   requestDisplaySetCreationForStudy: PropTypes.func.isRequired,
 };
@@ -322,7 +331,6 @@ function _mapDisplaySets(displaySets, thumbnailImageSrcMap) {
         numInstances: ds.numImageFrames,
         countIcon: ds.countIcon,
         StudyInstanceUID: ds.StudyInstanceUID,
-        componentType,
         imageSrc,
         dragData: {
           type: 'displayset',

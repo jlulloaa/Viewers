@@ -1,4 +1,4 @@
-const validationModule = () => {
+const getValidationModule = () => {
   return {
     id: 'default-validations',
     validations: [
@@ -84,4 +84,4 @@ const validationModule = () => {
 };
 
 // (JU)
-export default validationModule;
+export default getValidationModule;

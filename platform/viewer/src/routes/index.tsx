@@ -37,6 +37,7 @@ const createRoutes = ({
   servicesManager,
   commandsManager,
   hotkeysManager,
+  validationManager, // (JU)
   routerBasename,
   showStudyList,
 }) => {
@@ -48,6 +49,7 @@ const createRoutes = ({
       servicesManager,
       commandsManager,
       hotkeysManager,
+      validationManager, //(JU)
     }) || [];
 
   const { customizationService } = servicesManager.services;
@@ -81,6 +83,7 @@ const createRoutes = ({
           servicesManager={servicesManager}
           extensionManager={extensionManager}
           hotkeysManager={hotkeysManager}
+          validationManager={validationManager} // (JU)
         />
       </ErrorBoundary>
     );

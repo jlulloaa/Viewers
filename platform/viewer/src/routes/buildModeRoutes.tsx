@@ -28,6 +28,7 @@ export default function buildModeRoutes({
   servicesManager,
   commandsManager,
   hotkeysManager,
+  validationManager, //(JU)
 }) {
   const routes = [];
   const dataSourceNames = [];
@@ -53,6 +54,7 @@ export default function buildModeRoutes({
           servicesManager={servicesManager}
           commandsManager={commandsManager}
           hotkeysManager={hotkeysManager}
+          validationManager={validationManager} // (JU)
         />
       );
 
@@ -77,6 +79,7 @@ export default function buildModeRoutes({
         servicesManager={servicesManager}
         commandsManager={commandsManager}
         hotkeysManager={hotkeysManager}
+        validationManager={validationManager} // (JU)
       />
     );
 

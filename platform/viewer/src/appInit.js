@@ -36,7 +36,7 @@ async function appInit(appConfigOrFunc, defaultExtensions, defaultModes) {
   const commandsManager = new CommandsManager(commandsManagerConfig);
   const servicesManager = new ServicesManager(commandsManager);
   const hotkeysManager = new HotkeysManager(commandsManager, servicesManager);
-  const validationManager = new ValidationManager(commandsManager, servicesManager);
+  const validationManager = new ValidationManager();
 
   const appConfig = {
     ...(typeof appConfigOrFunc === 'function'

@@ -47,7 +47,7 @@ export interface Extension {
   getUtilityModule?: (p: ExtensionParams) => unknown;
   getCustomizationModule?: (p: ExtensionParams) => unknown;
   // (JU) getValidationModule, does it go here?
-  // getValidationModule?: (p: ExtensionParams) => unknown;
+  getValidationModule?: (p: ExtensionParams) => unknown;
   onModeEnter?: () => void;
   onModeExit?: () => void;
 }
@@ -113,8 +113,8 @@ export default class ExtensionManager {
       _servicesManager,
       _commandsManager,
       _hotkeysManager,
-      // (JU)
-      _validationManager,
+      // (JU) if understood correctly, validationManager can be considered as onModeEnter-type lifecycle hook
+      // _validationManager,
       _extensionLifeCycleHooks,
     } = this;
 
@@ -133,6 +133,8 @@ export default class ExtensionManager {
           servicesManager: _servicesManager,
           commandsManager: _commandsManager,
           hotkeysManager: _hotkeysManager,
+          // (JU) need to register the new module:
+          // validationManager: _validationManager,
         });
       }
     });
@@ -247,7 +249,7 @@ export default class ExtensionManager {
         servicesManager: this._servicesManager,
         commandsManager: this._commandsManager,
         hotkeysManager: this._hotkeysManager,
-        // JU
+        // (JU) - is validation Manager preReg hook or onModeEnter?
         validationManager: this._validationManager,
         extensionManager: this,
         appConfig: this._appConfig,
@@ -311,6 +313,9 @@ export default class ExtensionManager {
             });
             break;
           case MODULE_TYPES.VALIDATION:
+            console.log('(JU) registering Validation Module (EM)');
+            console.log(extensionModule);
+            console.log('-----');
             this._validationManager.registerValidationModule(extensionModule);
             break;
           default:
@@ -370,6 +375,8 @@ export default class ExtensionManager {
         commandsManager: this._commandsManager,
         servicesManager: this._servicesManager,
         hotkeysManager: this._hotkeysManager,
+        // (JU)
+        validationManager: this._validationManager,
         extensionManager: this,
         configuration,
       });

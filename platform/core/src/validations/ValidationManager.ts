@@ -11,7 +11,7 @@ export default class ValidationManager {
   //   hotkeysManager,
   //   appConfig = {},
   // }: any) {
-  constructor(commandsManager, servicesManager) {
+  constructor() {
     // (JU) Initialise these private variables, not sure is needed, but viewer loaded ok after adding them ...
     this._validationModules = [];
     this._displaySetValidations = [];
@@ -22,11 +22,18 @@ export default class ValidationManager {
     validationModule.validations.forEach(validationDefinition => {
       this.registerValidationDefinition(validationDefinition);
     });
+    console.log('(JU) Registering Validation Module from ExtMngr');
+    console.log('this._:');
+    console.log(this._validationModules);
+    console.log('validationModule:');
+    console.log(validationModule);
   }
 
   public registerValidationDefinition(validationDefinition: any) {
     switch (validationDefinition.type) {
       case 'displaySet':
+        console.log('(JU) registering Validation Definition');
+        console.log(validationDefinition);
         this._displaySetValidations.push(validationDefinition);
         break;
       // case 'study':
@@ -40,8 +47,8 @@ export default class ValidationManager {
       //   break;
     }
   }
-
   public validateDisplaySet(displaySet: any) {
+    console.log('(JU) validating Display Set:');
     const validationResults = this._displaySetValidations.map(
       validationDefinition => validationDefinition.validate(displaySet)
     );

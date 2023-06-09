@@ -8,6 +8,8 @@ import Compose from './routes/Mode/Compose';
 import {
   ServicesManager,
   ExtensionManager,
+  // (JU) Do I need validationManager here?
+  ValidationManager,
   CommandsManager,
   HotkeysManager,
 } from '@ohif/core';
@@ -32,6 +34,7 @@ import OpenIdConnectRoutes from './utils/OpenIdConnectRoutes';
 let commandsManager: CommandsManager,
   extensionManager: ExtensionManager,
   servicesManager: ServicesManager,
+  validationManager: ValidationManager, // (JU)
   hotkeysManager: HotkeysManager;
 
 function App({ config, defaultExtensions, defaultModes }) {
@@ -55,6 +58,8 @@ function App({ config, defaultExtensions, defaultModes }) {
   extensionManager = init.extensionManager;
   servicesManager = init.servicesManager;
   hotkeysManager = init.hotkeysManager;
+  // (JU)
+  validationManager = init.validationManager;
 
   // Set appConfig
   const appConfigState = init.appConfig;
@@ -105,6 +110,7 @@ function App({ config, defaultExtensions, defaultModes }) {
     servicesManager,
     commandsManager,
     hotkeysManager,
+    validationManager, // (JU)
     routerBasename,
     showStudyList,
   });
